@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الأسعار المباشرة - Crypto Intelligence Platform</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/responsive.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <span class="logo-icon">₿</span>
+                <span class="logo-text">CryptoHub</span>
+            </div>
+            <button class="menu-toggle" id="menuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="../index.html" class="nav-link">الرئيسية</a></li>
+                <li><a href="news.html" class="nav-link">الأخبار الرسمية</a></li>
+                <li><a href="volume.html" class="nav-link">حجم التداول</a></li>
+                <li><a href="analysis.html" class="nav-link">التحليل الفني</a></li>
+                <li><a href="whales.html" class="nav-link">نشاط الحيتان</a></li>
+                <li><a href="alerts.html" class="nav-link">التنبيهات الذكية</a></li>
+                <li><a href="favorites.html" class="nav-link">المفضلة</a></li>
+                <li><a href="settings.html" class="nav-link">الإعدادات</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <section class="coins-section">
+            <h2>الأسعار المباشرة للعملات الرقمية</h2>
+            
+            <div class="filter-section">
+                <input type="text" id="priceSearch" class="search-input" placeholder="ابحث عن عملة...">
+                <select id="sortBy" class="sort-select">
+                    <option value="market_cap">ترتيب حسب القيمة السوقية</option>
+                    <option value="price">ترتيب حسب السعر</option>
+                    <option value="change">ترتيب حسب التغير 24 ساعة</option>
+                    <option value="volume">ترتيب حسب الحجم</option>
+                </select>
+            </div>
+
+            <div class="prices-table">
+                <table id="pricesTable">
+                    <thead>
+                        <tr>
+                            <th>الرقم</th>
+                            <th>العملة</th>
+                            <th>السعر</th>
+                            <th>التغير 24 ساعة</th>
+                            <th>القيمة السوقية</th>
+                            <th>الحجم (24 ساعة)</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody id="pricesList">
+                        <tr><td colspan="7" class="loading">جاري التحميل...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2026 منصة ذكاء العملات الرقمية. جميع الحقوق محفوظة.</p>
+        </div>
+    </footer>
+
+    <style>
+        .filter-section {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .sort-select {
+            padding: 12px 15px;
+            background: var(--dark-card);
+            border: 1px solid var(--dark-border);
+            border-radius: 8px;
+            color: var(--light-text);
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .prices-table {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: rgba(30, 41, 59, 0.8);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        thead {
+            background: rgba(99, 102, 241, 0.1);
+            border-bottom: 1px solid var(--dark-border);
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: right;
+            border-bottom: 1px solid var(--dark-border);
+        }
+
+        th {
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        tbody tr:hover {
+            background: rgba(99, 102, 241, 0.05);
+        }
+
+        .loading {
+            text-align: center;
+            color: var(--muted-text);
+        }
+
+        .coin-name-cell {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .coin-img-small {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+        }
+    </style>
+
+    <script src="../assets/js/config.js"></script>
+    <script src="../assets/js/utils.js"></script>
+    <script src="../assets/js/api.js"></script>
+    <script src="../assets/js/ui.js"></script>
+    <script src="../assets/js/notifications.js"></script>
+    <script>
+        class PricesPage {
+            constructor() {
+                this.allCoins = [];
+                this.init();
+            }
+
+            async init() {
+                NotificationManager.init();
+                await this.loadPrices();
+                this.setupListeners();
+                this.setupAutoRefresh();
+            }
+
+            async loadPrices() {
+                const pricesList = document.getElementById('pricesList');
+                pricesList.innerHTML = '<tr><td colspan="7" class="loading">جاري التحميل...</td></tr>';
+
+                this.allCoins = await CryptoAPI.getTopCoins(250);
+                this.renderTable();
+            }
+
+            renderTable() {
+                const pricesList = document.getElementById('pricesList');
+                
+                if (this.allCoins.length === 0) {
+                    pricesList.innerHTML = '<tr><td colspan="7" class="loading">لا توجد بيانات</td></tr>';
+                    return;
+                }
+
+                pricesList.innerHTML = this.allCoins.map((coin, index) => `
+                    <tr>
+                        <td>${coin.market_cap_rank || '-'}</td>
+                        <td>
+                            <div class="coin-name-cell">
+                                <img src="${coin.image}" alt="${coin.name}" class="coin-img-small">
+                                <div>
+                                    <div style="font-weight: 600;">${coin.name}</div>
+                                    <div style="color: var(--muted-text); font-size: 12px;">${coin.symbol.toUpperCase()}</div>
+                                </div>
+                            </div>
+                        </td>
+                        <td>${Utils.formatCurrency(coin.current_price)}</td>
+                        <td class="${Utils.getChangeClass(coin.price_change_percentage_24h || 0)}">
+                            ${Utils.formatPercent(coin.price_change_percentage_24h || 0)}
+                        </td>
+                        <td>${Utils.formatCurrency(coin.market_cap || 0)}</td>
+                        <td>${Utils.formatCurrency(coin.total_volume || 0)}</td>
+                        <td>
+                            <button class="favorite-btn ${UI.isFavorite(coin.id) ? 'active' : ''}" data-coin-id="${coin.id}">
+                                ${UI.isFavorite(coin.id) ? '⭐' : '☆'}
+                            </button>
+                        </td>
+                    </tr>
+                `).join('');
+
+                UI.attachFavoriteListeners();
+            }
+
+            setupListeners() {
+                const searchInput = document.getElementById('priceSearch');
+                const sortBy = document.getElementById('sortBy');
+
+                searchInput.addEventListener('keyup', (e) => {
+                    this.filterCoins(e.target.value.toLowerCase());
+                });
+
+                sortBy.addEventListener('change', (e) => {
+                    this.sortCoins(e.target.value);
+                });
+            }
+
+            filterCoins(query) {
+                const filtered = this.allCoins.filter(coin =>
+                    coin.name.toLowerCase().includes(query) ||
+                    coin.symbol.toLowerCase().includes(query)
+                );
+                this.allCoins = filtered;
+                this.renderTable();
+            }
+
+            sortCoins(sortType) {
+                const coins = [...this.allCoins];
+                
+                switch (sortType) {
+                    case 'price':
+                        coins.sort((a, b) => b.current_price - a.current_price);
+                        break;
+                    case 'change':
+                        coins.sort((a, b) => (b.price_change_percentage_24h || 0) - (a.price_change_percentage_24h || 0));
+                        break;
+                    case 'volume':
+                        coins.sort((a, b) => (b.total_volume || 0) - (a.total_volume || 0));
+                        break;
+                    default:
+                        coins.sort((a, b) => (a.market_cap_rank || 999) - (b.market_cap_rank || 999));
+                }
+                
+                this.allCoins = coins;
+                this.renderTable();
+            }
+
+            setupAutoRefresh() {
+                setInterval(() => {
+                    this.loadPrices();
+                }, CONFIG.UPDATE_INTERVAL);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            new PricesPage();
+        });
+    </script>
+</body>
+</html>

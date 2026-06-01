@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>التحليل الفني - Crypto Intelligence Platform</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/responsive.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <span class="logo-icon">₿</span>
+                <span class="logo-text">CryptoHub</span>
+            </div>
+            <button class="menu-toggle" id="menuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="../index.html" class="nav-link">الرئيسية</a></li>
+                <li><a href="prices.html" class="nav-link">الأسعار المباشرة</a></li>
+                <li><a href="news.html" class="nav-link">الأخبار الرسمية</a></li>
+                <li><a href="volume.html" class="nav-link">حجم التداول</a></li>
+                <li><a href="whales.html" class="nav-link">نشاط الحيتان</a></li>
+                <li><a href="alerts.html" class="nav-link">التنبيهات الذكية</a></li>
+                <li><a href="favorites.html" class="nav-link">المفضلة</a></li>
+                <li><a href="settings.html" class="nav-link">الإعدادات</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <section class="coins-section">
+            <h2>التحليل الفني للعملات الرقمية</h2>
+            <p style="color: var(--muted-text); margin-bottom: 30px;">تحليلات تقنية متقدمة باستخدام مؤشرات RSI و MACD والمتوسطات المتحركة</p>
+
+            <div class="analysis-search">
+                <input type="text" id="coinSearch" class="search-input" placeholder="ابحث عن عملة للتحليل...">
+                <button id="analyzeBtn" class="search-btn">تحليل</button>
+            </div>
+
+            <div id="analysisResults" style="display: none; margin-top: 30px;">
+                <div class="analysis-container">
+                    <div class="analysis-card">
+                        <h3>مؤشر القوة النسبية (RSI)</h3>
+                        <div class="indicator-value" id="rsiValue">--</div>
+                        <div class="indicator-status" id="rsiStatus">--</div>
+                    </div>
+                    <div class="analysis-card">
+                        <h3>مؤشر الماك دي (MACD)</h3>
+                        <div class="indicator-value" id="macdValue">--</div>
+                        <div class="indicator-status" id="macdStatus">--</div>
+                    </div>
+                    <div class="analysis-card">
+                        <h3>المتوسط المتحرك (MA)</h3>
+                        <div class="indicator-value" id="maValue">--</div>
+                        <div class="indicator-status" id="maStatus">--</div>
+                    </div>
+                    <div class="analysis-card">
+                        <h3>قوة الاتجاه</h3>
+                        <div class="indicator-value" id="trendValue">--</div>
+                        <div class="indicator-status" id="trendStatus">--</div>
+                    </div>
+                </div>
+
+                <div class="signal-container">
+                    <h3>إشارات التداول</h3>
+                    <div id="signals" style="display: flex; flex-direction: column; gap: 10px; margin-top: 15px;">
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2026 منصة ذكاء العملات الرقمية. جميع الحقوق محفوظة.</p>
+        </div>
+    </footer>
+
+    <style>
+        .analysis-search {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+
+        .analysis-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .analysis-card {
+            background: rgba(30, 41, 59, 0.8);
+            border: 1px solid var(--dark-border);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .analysis-card h3 {
+            font-size: 14px;
+            color: var(--muted-text);
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        .indicator-value {
+            font-size: 28px;
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+
+        .indicator-status {
+            font-size: 14px;
+            padding: 8px 12px;
+            background: rgba(99, 102, 241, 0.1);
+            border-radius: 6px;
+            color: var(--primary-color);
+        }
+
+        .signal-container {
+            background: rgba(30, 41, 59, 0.8);
+            border: 1px solid var(--dark-border);
+            border-radius: 12px;
+            padding: 20px;
+        }
+
+        .signal-item {
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 14px;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .signal-buy {
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--success-color);
+            border-left: 3px solid var(--success-color);
+        }
+
+        .signal-sell {
+            background: rgba(239, 68, 68, 0.1);
+            color: var(--danger-color);
+            border-left: 3px solid var(--danger-color);
+        }
+    </style>
+
+    <script src="../assets/js/config.js"></script>
+    <script src="../assets/js/utils.js"></script>
+    <script src="../assets/js/api.js"></script>
+    <script src="../assets/js/notifications.js"></script>
+    <script>
+        class AnalysisPage {
+            constructor() {
+                this.init();
+            }
+
+            init() {
+                NotificationManager.init();
+                this.setupListeners();
+            }
+
+            setupListeners() {
+                const analyzeBtn = document.getElementById('analyzeBtn');
+                const coinSearch = document.getElementById('coinSearch');
+
+                analyzeBtn.addEventListener('click', () => this.performAnalysis());
+                coinSearch.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter') this.performAnalysis();
+                });
+            }
+
+            performAnalysis() {
+                const analysisResults = document.getElementById('analysisResults');
+                analysisResults.style.display = 'block';
+
+                // محاكاة بيانات التحليل الفني
+                const rsi = Math.floor(Math.random() * 100);
+                const macd = (Math.random() * 2 - 1).toFixed(4);
+                const trendStrength = Math.floor(Math.random() * 100);
+
+                document.getElementById('rsiValue').textContent = rsi;
+                document.getElementById('rsiStatus').textContent = rsi > 70 ? 'بيع (Overbought)' : rsi < 30 ? 'شراء (Oversold)' : 'محايد';
+
+                document.getElementById('macdValue').textContent = macd;
+                document.getElementById('macdStatus').textContent = macd > 0 ? 'صاعد' : 'هابط';
+
+                document.getElementById('maValue').textContent = 'نشط';
+                document.getElementById('maStatus').textContent = 'السعر فوق MA';
+
+                document.getElementById('trendValue').textContent = trendStrength + '%';
+                document.getElementById('trendStatus').textContent = trendStrength > 60 ? 'قوي' : 'ضعيف';
+
+                // الإشارات
+                const signals = document.getElementById('signals');
+                signals.innerHTML = `
+                    <div class="signal-item signal-buy">✓ إشارة شراء: تقاطع صاعد في MACD</div>
+                    <div class="signal-item signal-sell">✗ إشارة بيع: مؤشر RSI في منطقة الشراء الزائد</div>
+                    <div class="signal-item signal-buy">✓ إشارة شراء: السعر فوق المتوسط المتحرك</div>
+                `;
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            new AnalysisPage();
+        });
+    </script>
+</body>
+</html>

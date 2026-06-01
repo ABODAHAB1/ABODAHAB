@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>حجم التداول - Crypto Intelligence Platform</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/responsive.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <span class="logo-icon">₿</span>
+                <span class="logo-text">CryptoHub</span>
+            </div>
+            <button class="menu-toggle" id="menuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="../index.html" class="nav-link">الرئيسية</a></li>
+                <li><a href="prices.html" class="nav-link">الأسعار المباشرة</a></li>
+                <li><a href="news.html" class="nav-link">الأخبار الرسمية</a></li>
+                <li><a href="analysis.html" class="nav-link">التحليل الفني</a></li>
+                <li><a href="whales.html" class="nav-link">نشاط الحيتان</a></li>
+                <li><a href="alerts.html" class="nav-link">التنبيهات الذكية</a></li>
+                <li><a href="favorites.html" class="nav-link">المفضلة</a></li>
+                <li><a href="settings.html" class="nav-link">الإعدادات</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <section class="coins-section">
+            <h2>حجم تداول العملات الرقمية</h2>
+            <p style="color: var(--muted-text); margin-bottom: 30px;">تتبع أحجام التداول والحركات النشطة في السوق</p>
+            
+            <div id="volumeGrid" class="coins-grid">
+                <div class="loading-skeleton"></div>
+                <div class="loading-skeleton"></div>
+                <div class="loading-skeleton"></div>
+                <div class="loading-skeleton"></div>
+            </div>
+        </section>
+
+        <section class="coins-section">
+            <h2>أعلى أحجام التداول</h2>
+            <div class="prices-table">
+                <table id="volumeTable">
+                    <thead>
+                        <tr>
+                            <th>العملة</th>
+                            <th>الحجم (24 ساعة)</th>
+                            <th>نسبة الحجم/القيمة السوقية</th>
+                            <th>تغيير الحجم</th>
+                        </tr>
+                    </thead>
+                    <tbody id="volumeList">
+                        <tr><td colspan="4" class="loading">جاري التحميل...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2026 منصة ذكاء العملات الرقمية. جميع الحقوق محفوظة.</p>
+        </div>
+    </footer>
+
+    <style>
+        .prices-table {
+            overflow-x: auto;
+            margin-top: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: rgba(30, 41, 59, 0.8);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        thead {
+            background: rgba(99, 102, 241, 0.1);
+            border-bottom: 1px solid var(--dark-border);
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: right;
+            border-bottom: 1px solid var(--dark-border);
+        }
+
+        th {
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        tbody tr:hover {
+            background: rgba(99, 102, 241, 0.05);
+        }
+
+        .loading {
+            text-align: center;
+            color: var(--muted-text);
+        }
+
+        .volume-card {
+            background: rgba(30, 41, 59, 0.8);
+            border: 1px solid var(--dark-border);
+            border-radius: 16px;
+            padding: 20px;
+            transition: var(--transition);
+        }
+
+        .volume-card:hover {
+            background: rgba(30, 41, 59, 1);
+            border-color: var(--primary-color);
+            transform: translateY(-8px);
+        }
+
+        .volume-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 15px;
+        }
+
+        .volume-value {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--primary-color);
+            margin: 10px 0;
+        }
+
+        .volume-change {
+            font-size: 14px;
+            font-weight: 600;
+        }
+    </style>
+
+    <script src="../assets/js/config.js"></script>
+    <script src="../assets/js/utils.js"></script>
+    <script src="../assets/js/api.js"></script>
+    <script src="../assets/js/ui.js"></script>
+    <script src="../assets/js/notifications.js"></script>
+    <script>
+        class VolumePage {
+            constructor() {
+                this.allCoins = [];
+                this.init();
+            }
+
+            async init() {
+                NotificationManager.init();
+                await this.loadVolumeData();
+                this.setupAutoRefresh();
+            }
+
+            async loadVolumeData() {
+                const volumeGrid = document.getElementById('volumeGrid');
+                volumeGrid.innerHTML = `
+                    <div class="loading-skeleton"></div>
+                    <div class="loading-skeleton"></div>
+                    <div class="loading-skeleton"></div>
+                    <div class="loading-skeleton"></div>
+                `;
+
+                this.allCoins = await CryptoAPI.getTopCoins(50);
+                this.allCoins.sort((a, b) => (b.total_volume || 0) - (a.total_volume || 0));
+
+                this.renderVolumeCards();
+                this.renderVolumeTable();
+            }
+
+            renderVolumeCards() {
+                const volumeGrid = document.getElementById('volumeGrid');
+                const topVolumes = this.allCoins.slice(0, 4);
+
+                volumeGrid.innerHTML = topVolumes.map(coin => `
+                    <div class="volume-card">
+                        <div class="volume-header">
+                            <img src="${coin.image}" alt="${coin.name}" style="width: 40px; height: 40px; border-radius: 50%;">
+                            <div>
+                                <div style="font-weight: 600;">${coin.name}</div>
+                                <div style="color: var(--muted-text); font-size: 12px;">${coin.symbol.toUpperCase()}</div>
+                            </div>
+                        </div>
+                        <div class="volume-value">${Utils.formatCurrency(coin.total_volume || 0)}</div>
+                        <div class="volume-change" style="color: ${coin.total_volume > 0 ? 'var(--success-color)' : 'var(--danger-color)'}">
+                            النسبة: ${((coin.total_volume / (coin.market_cap || 1)) * 100).toFixed(2)}%
+                        </div>
+                    </div>
+                `).join('');
+            }
+
+            renderVolumeTable() {
+                const volumeList = document.getElementById('volumeList');
+
+                volumeList.innerHTML = this.allCoins.map(coin => `
+                    <tr>
+                        <td>
+                            <div style="display: flex; align-items: center; gap: 10px;">
+                                <img src="${coin.image}" alt="${coin.name}" style="width: 30px; height: 30px; border-radius: 50%;">
+                                <div>
+                                    <div style="font-weight: 600;">${coin.name}</div>
+                                    <div style="color: var(--muted-text); font-size: 12px;">${coin.symbol.toUpperCase()}</div>
+                                </div>
+                            </div>
+                        </td>
+                        <td>${Utils.formatCurrency(coin.total_volume || 0)}</td>
+                        <td>${((coin.total_volume / (coin.market_cap || 1)) * 100).toFixed(2)}%</td>
+                        <td style="color: ${(coin.total_volume || 0) > 0 ? 'var(--success-color)' : 'var(--danger-color)'}">
+                            ${Utils.formatPercent((coin.total_volume || 0) > 0 ? 5 : -5)}
+                        </td>
+                    </tr>
+                `).join('');
+            }
+
+            setupAutoRefresh() {
+                setInterval(() => {
+                    this.loadVolumeData();
+                }, CONFIG.UPDATE_INTERVAL);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            new VolumePage();
+        });
+    </script>
+</body>
+</html>

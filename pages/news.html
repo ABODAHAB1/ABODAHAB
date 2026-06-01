@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الأخبار الرسمية - Crypto Intelligence Platform</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/responsive.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <span class="logo-icon">₿</span>
+                <span class="logo-text">CryptoHub</span>
+            </div>
+            <button class="menu-toggle" id="menuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="../index.html" class="nav-link">الرئيسية</a></li>
+                <li><a href="prices.html" class="nav-link">الأسعار المباشرة</a></li>
+                <li><a href="volume.html" class="nav-link">حجم التداول</a></li>
+                <li><a href="analysis.html" class="nav-link">التحليل الفني</a></li>
+                <li><a href="whales.html" class="nav-link">نشاط الحيتان</a></li>
+                <li><a href="alerts.html" class="nav-link">التنبيهات الذكية</a></li>
+                <li><a href="favorites.html" class="nav-link">المفضلة</a></li>
+                <li><a href="settings.html" class="nav-link">الإعدادات</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <section class="coins-section">
+            <h2>أخبار العملات الرقمية</h2>
+
+            <!-- News Categories -->
+            <div class="news-categories">
+                <button class="category-btn active" data-category="all">جميع الأخبار</button>
+                <button class="category-btn" data-category="breaking">أخبار عاجلة</button>
+                <button class="category-btn" data-category="official">إعلانات رسمية</button>
+                <button class="category-btn" data-category="market">أخبار السوق</button>
+            </div>
+
+            <div id="newsList" class="news-list">
+                <div class="loading-skeleton"></div>
+                <div class="loading-skeleton"></div>
+                <div class="loading-skeleton"></div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2026 منصة ذكاء العملات الرقمية. جميع الحقوق محفوظة.</p>
+        </div>
+    </footer>
+
+    <style>
+        .news-categories {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .category-btn {
+            padding: 10px 20px;
+            background: var(--dark-card);
+            border: 1px solid var(--dark-border);
+            border-radius: 20px;
+            color: var(--light-text);
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 500;
+        }
+
+        .category-btn:hover,
+        .category-btn.active {
+            background: var(--primary-color);
+            border-color: var(--primary-color);
+            color: white;
+        }
+
+        .news-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .news-card {
+            background: rgba(30, 41, 59, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--dark-border);
+            border-radius: 12px;
+            padding: 20px;
+            transition: var(--transition);
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 20px;
+            align-items: start;
+        }
+
+        .news-card:hover {
+            background: rgba(30, 41, 59, 1);
+            border-color: var(--primary-color);
+            transform: translateX(-5px);
+        }
+
+        .news-content h3 {
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: var(--light-text);
+        }
+
+        .news-desc {
+            color: var(--muted-text);
+            font-size: 14px;
+            margin-bottom: 10px;
+            line-height: 1.5;
+        }
+
+        .news-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 12px;
+            color: var(--muted-text);
+        }
+
+        .news-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            background: rgba(99, 102, 241, 0.2);
+            border-radius: 20px;
+            color: var(--primary-color);
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .news-image {
+            width: 120px;
+            height: 120px;
+            border-radius: 8px;
+            object-fit: cover;
+        }
+
+        @media (max-width: 768px) {
+            .news-card {
+                grid-template-columns: 1fr;
+            }
+
+            .news-image {
+                width: 100%;
+                height: auto;
+            }
+        }
+    </style>
+
+    <script src="../assets/js/config.js"></script>
+    <script src="../assets/js/utils.js"></script>
+    <script src="../assets/js/api.js"></script>
+    <script src="../assets/js/notifications.js"></script>
+    <script>
+        class NewsPage {
+            constructor() {
+                this.allNews = [];
+                this.init();
+            }
+
+            init() {
+                NotificationManager.init();
+                this.loadNews();
+                this.setupCategoryListeners();
+            }
+
+            loadNews() {
+                this.allNews = [
+                    {
+                        id: 1,
+                        title: 'البيتكوين يتجاوز 50000 دولار',
+                        description: 'وصل سعر البيتكوين إلى أعلى مستوى جديد له في السنة الحالية، محققاً مكاسب كبيرة للمستثمرين.',
+                        category: 'breaking',
+                        image: 'https://via.placeholder.com/120x120?text=Bitcoin',
+                        timestamp: new Date(Date.now() - 3600000),
+                        source: 'CoinTelegraph'
+                    },
+                    {
+                        id: 2,
+                        title: 'Ethereum تطلق ترقية جديدة',
+                        description: 'أعلنت فريق Ethereum عن ترقية حديثة تحسن من كفاءة الشبكة.',
+                        category: 'official',
+                        image: 'https://via.placeholder.com/120x120?text=Ethereum',
+                        timestamp: new Date(Date.now() - 7200000),
+                        source: 'Ethereum Blog'
+                    },
+                    {
+                        id: 3,
+                        title: 'تراجع أسواق العملات الرقمية',
+                        description: 'شهدت أسواق العملات الرقمية تراجعاً طفيفاً بسبب تطورات اقتصادية عالمية.',
+                        category: 'market',
+                        image: 'https://via.placeholder.com/120x120?text=Market',
+                        timestamp: new Date(Date.now() - 10800000),
+                        source: 'الأخبار المالية'
+                    }
+                ];
+
+                this.renderNews('all');
+            }
+
+            renderNews(category) {
+                const newsList = document.getElementById('newsList');
+                let filtered = this.allNews;
+
+                if (category !== 'all') {
+                    filtered = this.allNews.filter(news => news.category === category);
+                }
+
+                if (filtered.length === 0) {
+                    newsList.innerHTML = '<p style="text-align: center; color: var(--muted-text); padding: 40px;">لا توجد أخبار في هذه الفئة</p>';
+                    return;
+                }
+
+                newsList.innerHTML = filtered.map(news => `
+                    <div class="news-card">
+                        <div class="news-content">
+                            <div style="display: flex; gap: 10px; align-items: center;">
+                                <h3>${news.title}</h3>
+                                <span class="news-badge">${this.getCategoryLabel(news.category)}</span>
+                            </div>
+                            <p class="news-desc">${news.description}</p>
+                            <div class="news-footer">
+                                <span>${news.source}</span>
+                                <span>${Utils.formatDate(news.timestamp)}</span>
+                            </div>
+                        </div>
+                        <img src="${news.image}" alt="${news.title}" class="news-image">
+                    </div>
+                `).join('');
+            }
+
+            getCategoryLabel(category) {
+                const labels = {
+                    'all': 'جميع الأخبار',
+                    'breaking': 'عاجل',
+                    'official': 'رسمي',
+                    'market': 'السوق'
+                };
+                return labels[category] || category;
+            }
+
+            setupCategoryListeners() {
+                document.querySelectorAll('.category-btn').forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
+                        e.target.classList.add('active');
+                        this.renderNews(e.target.dataset.category);
+                    });
+                });
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            new NewsPage();
+        });
+    </script>
+</body>
+</html>
