@@ -1,170 +1,556 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>منصة ذكاء العملات الرقمية - Crypto Intelligence Platform</title>
-    <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="stylesheet" href="assets/css/responsive.css">
+    <title>Mercedes-Benz | Future of Luxury Performance</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800&family=Poppins:wght@300;400;600;700&family=Bebas+Neue&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Navigation Bar -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <div class="logo">
-                <span class="logo-icon">₿</span>
-                <span class="logo-text">CryptoHub</span>
-            </div>
-            <button class="menu-toggle" id="menuToggle">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
-            <ul class="nav-links" id="navLinks">
-                <li><a href="pages/prices.html" class="nav-link">الأسعار المباشرة</a></li>
-                <li><a href="pages/news.html" class="nav-link">الأخبار الرسمية</a></li>
-                <li><a href="pages/volume.html" class="nav-link">حجم التداول</a></li>
-                <li><a href="pages/analysis.html" class="nav-link">التحليل الفني</a></li>
-                <li><a href="pages/whales.html" class="nav-link">نشاط الحيتان</a></li>
-                <li><a href="pages/alerts.html" class="nav-link">التنبيهات الذكية</a></li>
-                <li><a href="pages/favorites.html" class="nav-link">المفضلة</a></li>
-                <li><a href="pages/settings.html" class="nav-link">الإعدادات</a></li>
-            </ul>
-        </div>
-    </nav>
-
-    <!-- Main Content -->
-    <main class="main-content">
-        <!-- Hero Section -->
-        <section class="hero">
-            <div class="hero-content">
-                <h1>منصة ذكاء العملات الرقمية</h1>
-                <p>تابع أسعار العملات الرقمية بشكل مباشر واحصل على تحليلات احترافية</p>
-            </div>
-        </section>
-
-        <!-- Search Section -->
-        <section class="search-section">
-            <div class="search-container">
-                <input type="text" id="searchInput" class="search-input" placeholder="ابحث عن عملة رقمية...">
-                <button id="searchBtn" class="search-btn">البحث</button>
-            </div>
-        </section>
-
-        <!-- Market Overview -->
-        <section class="market-overview">
-            <div class="overview-card">
-                <div class="card-header">إجمالي القيمة السوقية</div>
-                <div class="card-value" id="totalMarketCap">--</div>
-                <div class="card-change" id="marketCapChange">--</div>
-            </div>
-            <div class="overview-card">
-                <div class="card-header">حجم التداول (24 ساعة)</div>
-                <div class="card-value" id="volume24h">--</div>
-                <div class="card-change" id="volumeChange">--</div>
-            </div>
-            <div class="overview-card">
-                <div class="card-header">سيطرة البيتكوين</div>
-                <div class="card-value" id="btcDominance">--</div>
-                <div class="card-change" id="btcDominanceChange">--</div>
-            </div>
-            <div class="overview-card fear-greed">
-                <div class="card-header">مؤشر الخوف والجشع</div>
-                <div class="fear-greed-meter">
-                    <div class="meter-bar">
-                        <div class="meter-fill" id="fearGreedFill"></div>
-                    </div>
-                    <div class="meter-value" id="fearGreedValue">--</div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Top Gainers -->
-        <section class="coins-section">
-            <h2>أفضل المكاسب</h2>
-            <div class="coins-grid" id="gainersGrid">
-                <div class="loading-skeleton"></div>
-                <div class="loading-skeleton"></div>
-                <div class="loading-skeleton"></div>
-                <div class="loading-skeleton"></div>
-            </div>
-        </section>
-
-        <!-- Top Losers -->
-        <section class="coins-section">
-            <h2>أكبر الخسائر</h2>
-            <div class="coins-grid" id="losersGrid">
-                <div class="loading-skeleton"></div>
-                <div class="loading-skeleton"></div>
-                <div class="loading-skeleton"></div>
-                <div class="loading-skeleton"></div>
-            </div>
-        </section>
-
-        <!-- Trending Coins -->
-        <section class="coins-section">
-            <h2>العملات الرائجة</h2>
-            <div class="coins-grid" id="trendingGrid">
-                <div class="loading-skeleton"></div>
-                <div class="loading-skeleton"></div>
-                <div class="loading-skeleton"></div>
-                <div class="loading-skeleton"></div>
-            </div>
-        </section>
-
-        <!-- Quick Navigation -->
-        <section class="quick-nav">
-            <h2>الملاحة السريعة</h2>
-            <div class="nav-cards">
-                <a href="pages/prices.html" class="nav-card">
-                    <div class="nav-icon">📈</div>
-                    <div class="nav-title">الأسعار المباشرة</div>
-                    <div class="nav-desc">تتبع أسعار العملات الرقمية</div>
-                </a>
-                <a href="pages/news.html" class="nav-card">
-                    <div class="nav-icon">📰</div>
-                    <div class="nav-title">الأخبار</div>
-                    <div class="nav-desc">آخر أخبار العملات الرقمية</div>
-                </a>
-                <a href="pages/analysis.html" class="nav-card">
-                    <div class="nav-icon">📊</div>
-                    <div class="nav-title">التحليل الفني</div>
-                    <div class="nav-desc">مؤشرات وتحليلات احترافية</div>
-                </a>
-                <a href="pages/whales.html" class="nav-card">
-                    <div class="nav-icon">🐋</div>
-                    <div class="nav-title">نشاط الحيتان</div>
-                    <div class="nav-desc">تتبع الحركات الكبيرة</div>
-                </a>
-            </div>
-        </section>
-    </main>
-
-    <!-- Notification Permission Modal -->
-    <div class="modal" id="notificationModal">
-        <div class="modal-content">
-            <h2>تفعيل التنبيهات</h2>
-            <p>هل تريد تلقي تنبيهات وإشعارات سوق العملات الرقمية المهمة؟</p>
-            <div class="modal-buttons">
-                <button id="notificationYes" class="btn btn-primary">نعم، فعّل التنبيهات</button>
-                <button id="notificationNo" class="btn btn-secondary">لا، شكراً</button>
+    <!-- Loading Screen -->
+    <div id="loadingScreen" class="loading-screen">
+        <div class="loading-content">
+            <h1 class="loading-title">MERCEDES</h1>
+            <div class="loading-line"></div>
+            <p class="loading-text">ENGINEERING EXCELLENCE</p>
+            <div class="loading-dots">
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
             </div>
         </div>
     </div>
 
+    <!-- Navbar -->
+    <nav id="navbar" class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">MERCEDES</div>
+            <div class="nav-menu" id="navMenu">
+                <a href="#home" class="nav-link">Home</a>
+                <a href="#vehicles" class="nav-link">Vehicles</a>
+                <a href="#amg" class="nav-link">AMG</a>
+                <a href="#electric" class="nav-link">Electric</a>
+                <a href="#suv" class="nav-link">SUV</a>
+                <a href="#experience" class="nav-link">Experience</a>
+                <a href="#contact" class="nav-link">Contact</a>
+            </div>
+            <button class="nav-btn">Book Test Drive</button>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-section">
+        <canvas id="particleCanvas"></canvas>
+        <div class="hero-overlay"></div>
+        
+        <div class="hero-content">
+            <h1 class="hero-title" data-aos="fade-in">MERCEDES-BENZ</h1>
+            <div class="hero-line"></div>
+            <h2 class="hero-subtitle" data-aos="fade-in">Future of Luxury Performance</h2>
+
+            <!-- Car Display -->
+            <div class="hero-car" data-aos="zoom-in">
+                <div class="car-glow"></div>
+                <div class="car-emoji">🏎️</div>
+                <div class="headlight left-headlight"></div>
+                <div class="headlight right-headlight"></div>
+                <div class="reflection-floor"></div>
+            </div>
+
+            <!-- CTA Buttons -->
+            <div class="hero-buttons" data-aos="fade-up">
+                <button class="btn btn-glow">Explore Cars</button>
+                <button class="btn btn-blue">Build Your AMG</button>
+                <button class="btn btn-red">Book Test Drive</button>
+            </div>
+
+            <!-- Stats Cards -->
+            <div class="stats-grid" data-aos="fade-up">
+                <div class="stat-card">
+                    <div class="stat-icon">⚡</div>
+                    <p class="stat-label">Horsepower</p>
+                    <p class="stat-value">585 HP</p>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">🏁</div>
+                    <p class="stat-label">0-100 km/h</p>
+                    <p class="stat-value">3.5s</p>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">🚀</div>
+                    <p class="stat-label">Top Speed</p>
+                    <p class="stat-value">320 km/h</p>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">🔧</div>
+                    <p class="stat-label">Engine</p>
+                    <p class="stat-value">V8 Biturbo</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scroll Indicator -->
+        <div class="scroll-indicator">
+            <p>SCROLL</p>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path d="M19 14l-7 7m0 0l-7-7m7 7V3" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+        </div>
+    </section>
+
+    <!-- Featured Vehicles -->
+    <section id="vehicles" class="featured-vehicles">
+        <div class="section-container">
+            <div class="section-header" data-aos="fade-in">
+                <h2 class="section-title">FEATURED COLLECTION</h2>
+                <div class="section-line"></div>
+                <p class="section-subtitle">Experience the pinnacle of automotive excellence</p>
+            </div>
+
+            <div class="vehicles-grid">
+                <div class="vehicle-card" data-aos="fade-up">
+                    <div class="vehicle-image">
+                        <div class="vehicle-emoji">🏎️</div>
+                        <div class="vehicle-lights"></div>
+                    </div>
+                    <h3 class="vehicle-name">AMG GT</h3>
+                    <p class="vehicle-price">$115,000</p>
+                    <div class="vehicle-specs">
+                        <div class="spec"><span>Horsepower</span><span>630 HP</span></div>
+                        <div class="spec"><span>Engine</span><span>V8 Biturbo</span></div>
+                    </div>
+                    <div class="vehicle-buttons">
+                        <button class="btn-small">View Details</button>
+                        <button class="btn-small-blue">Configure</button>
+                    </div>
+                </div>
+
+                <div class="vehicle-card" data-aos="fade-up" style="--delay: 0.1s">
+                    <div class="vehicle-image">
+                        <div class="vehicle-emoji">🚙</div>
+                        <div class="vehicle-lights"></div>
+                    </div>
+                    <h3 class="vehicle-name">G63 AMG</h3>
+                    <p class="vehicle-price">$145,000</p>
+                    <div class="vehicle-specs">
+                        <div class="spec"><span>Horsepower</span><span>585 HP</span></div>
+                        <div class="spec"><span>Engine</span><span>V8 Biturbo</span></div>
+                    </div>
+                    <div class="vehicle-buttons">
+                        <button class="btn-small">View Details</button>
+                        <button class="btn-small-blue">Configure</button>
+                    </div>
+                </div>
+
+                <div class="vehicle-card" data-aos="fade-up" style="--delay: 0.2s">
+                    <div class="vehicle-image">
+                        <div class="vehicle-emoji">🚗</div>
+                        <div class="vehicle-lights"></div>
+                    </div>
+                    <h3 class="vehicle-name">S-Class</h3>
+                    <p class="vehicle-price">$110,000</p>
+                    <div class="vehicle-specs">
+                        <div class="spec"><span>Horsepower</span><span>503 HP</span></div>
+                        <div class="spec"><span>Engine</span><span>V8 Biturbo</span></div>
+                    </div>
+                    <div class="vehicle-buttons">
+                        <button class="btn-small">View Details</button>
+                        <button class="btn-small-blue">Configure</button>
+                    </div>
+                </div>
+
+                <div class="vehicle-card" data-aos="fade-up" style="--delay: 0.3s">
+                    <div class="vehicle-image">
+                        <div class="vehicle-emoji">⚡</div>
+                        <div class="vehicle-lights"></div>
+                    </div>
+                    <h3 class="vehicle-name">EQS Electric</h3>
+                    <p class="vehicle-price">$105,000</p>
+                    <div class="vehicle-specs">
+                        <div class="spec"><span>Horsepower</span><span>516 HP</span></div>
+                        <div class="spec"><span>Engine</span><span>Dual Motor</span></div>
+                    </div>
+                    <div class="vehicle-buttons">
+                        <button class="btn-small">View Details</button>
+                        <button class="btn-small-blue">Configure</button>
+                    </div>
+                </div>
+
+                <div class="vehicle-card" data-aos="fade-up" style="--delay: 0.4s">
+                    <div class="vehicle-image">
+                        <div class="vehicle-emoji">🎯</div>
+                        <div class="vehicle-lights"></div>
+                    </div>
+                    <h3 class="vehicle-name">CLS Coupe</h3>
+                    <p class="vehicle-price">$85,000</p>
+                    <div class="vehicle-specs">
+                        <div class="spec"><span>Horsepower</span><span>429 HP</span></div>
+                        <div class="spec"><span>Engine</span><span>V6 Turbo</span></div>
+                    </div>
+                    <div class="vehicle-buttons">
+                        <button class="btn-small">View Details</button>
+                        <button class="btn-small-blue">Configure</button>
+                    </div>
+                </div>
+
+                <div class="vehicle-card" data-aos="fade-up" style="--delay: 0.5s">
+                    <div class="vehicle-image">
+                        <div class="vehicle-emoji">👑</div>
+                        <div class="vehicle-lights"></div>
+                    </div>
+                    <h3 class="vehicle-name">Maybach</h3>
+                    <p class="vehicle-price">$185,000</p>
+                    <div class="vehicle-specs">
+                        <div class="spec"><span>Horsepower</span><span>621 HP</span></div>
+                        <div class="spec"><span>Engine</span><span>V12 Biturbo</span></div>
+                    </div>
+                    <div class="vehicle-buttons">
+                        <button class="btn-small">View Details</button>
+                        <button class="btn-small-blue">Configure</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- AMG Performance -->
+    <section id="amg" class="amg-performance">
+        <div class="section-container">
+            <div class="section-header" data-aos="fade-in">
+                <h2 class="section-title text-red">AMG PERFORMANCE</h2>
+                <div class="section-line line-red"></div>
+                <p class="section-subtitle">Engineered for uncompromising performance</p>
+            </div>
+
+            <div class="amg-grid">
+                <div class="amg-stats" data-aos="fade-right">
+                    <div class="amg-stat-card">
+                        <div class="stat-icon">⚡</div>
+                        <div>
+                            <p class="stat-label">0-100 km/h</p>
+                            <p class="stat-value text-red">3.5s</p>
+                        </div>
+                    </div>
+                    <div class="amg-stat-card">
+                        <div class="stat-icon">🚀</div>
+                        <div>
+                            <p class="stat-label">Top Speed</p>
+                            <p class="stat-value text-red">320 km/h</p>
+                        </div>
+                    </div>
+                    <div class="amg-stat-card">
+                        <div class="stat-icon">💪</div>
+                        <div>
+                            <p class="stat-label">Torque</p>
+                            <p class="stat-value text-red">900 Nm</p>
+                        </div>
+                    </div>
+                    <div class="amg-stat-card">
+                        <div class="stat-icon">🔥</div>
+                        <div>
+                            <p class="stat-label">G-Force</p>
+                            <p class="stat-value text-red">1.5G</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="amg-visual" data-aos="fade-left">
+                    <div class="speedometer">
+                        <div class="speedometer-ring"></div>
+                        <svg class="speedometer-markers" viewBox="0 0 100 100">
+                            <line x1="50" y1="10" x2="50" y2="5" stroke="rgba(220, 20, 60, 0.4)" stroke-width="0.5"/>
+                            <line x1="75" y1="15" x2="77" y2="10" stroke="rgba(220, 20, 60, 0.4)" stroke-width="0.5"/>
+                            <line x1="90" y1="30" x2="95" y2="27" stroke="rgba(220, 20, 60, 0.4)" stroke-width="0.5"/>
+                        </svg>
+                        <div class="speedometer-needle"></div>
+                        <div class="speedometer-center"></div>
+                        <div class="speedometer-display">
+                            <p class="speed-number">320</p>
+                            <p class="speed-unit">km/h</p>
+                        </div>
+                    </div>
+
+                    <div class="turbo-box">
+                        <p class="turbo-label">V8 BITURBO ENGINE</p>
+                        <p class="turbo-value">585 HP</p>
+                        <p class="turbo-status">TURBO CHARGING...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Electric Future -->
+    <section id="electric" class="electric-future">
+        <div class="section-container">
+            <div class="section-header" data-aos="fade-in">
+                <h2 class="section-title text-blue">ELECTRIC FUTURE</h2>
+                <div class="section-line line-blue"></div>
+                <p class="section-subtitle">The next generation of luxury electric mobility</p>
+            </div>
+
+            <div class="features-grid" data-aos="fade-up">
+                <div class="feature-card">
+                    <div class="feature-icon">🔋</div>
+                    <h3>Battery Range</h3>
+                    <p>600+ km per charge</p>
+                    <p class="feature-value">600 km</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Charging Speed</h3>
+                    <p>80% in 30 minutes</p>
+                    <p class="feature-value">30 min</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🤖</div>
+                    <h3>AI Driving</h3>
+                    <p>Autonomous capabilities</p>
+                    <p class="feature-value">Level 4</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🌐</div>
+                    <h3>Smart Cockpit</h3>
+                    <p>Holographic display</p>
+                    <p class="feature-value">8K Display</p>
+                </div>
+            </div>
+
+            <div class="charging-status" data-aos="fade-up">
+                <h3>Charging Status</h3>
+                <div class="charging-bar">
+                    <div class="charging-level"></div>
+                </div>
+                <p class="charging-text">Time Remaining: 8 minutes</p>
+                <div class="charging-info">
+                    <div>
+                        <p class="info-label">Power Input</p>
+                        <p class="info-value">350 kW</p>
+                    </div>
+                    <div>
+                        <p class="info-label">Range Added</p>
+                        <p class="info-value">150 km</p>
+                    </div>
+                    <div>
+                        <p class="info-label">Efficiency</p>
+                        <p class="info-value">94%</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Build Your Car -->
+    <section id="experience" class="build-car">
+        <div class="section-container">
+            <div class="section-header" data-aos="fade-in">
+                <h2 class="section-title">BUILD YOUR CAR</h2>
+                <div class="section-line"></div>
+                <p class="section-subtitle">Create your perfect Mercedes-Benz</p>
+            </div>
+
+            <div class="build-grid">
+                <!-- Configurator -->
+                <div class="configurator" data-aos="fade-right">
+                    <!-- Color Selector -->
+                    <div class="config-section">
+                        <h3>COLOR</h3>
+                        <div class="color-grid">
+                            <button class="color-btn active" data-color="black" style="--color: #000000">
+                                <div class="color-swatch"></div>
+                                <p>Obsidian Black</p>
+                            </button>
+                            <button class="color-btn" data-color="silver" style="--color: #c0c0c0">
+                                <div class="color-swatch"></div>
+                                <p>Diamond Silver</p>
+                            </button>
+                            <button class="color-btn" data-color="white" style="--color: #ffffff">
+                                <div class="color-swatch"></div>
+                                <p>Alpine White</p>
+                            </button>
+                            <button class="color-btn" data-color="red" style="--color: #dc143c">
+                                <div class="color-swatch"></div>
+                                <p>Patagonia Red</p>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Wheels Selector -->
+                    <div class="config-section">
+                        <h3>WHEELS</h3>
+                        <div class="wheels-grid">
+                            <button class="wheel-btn active" data-wheels="19">19"</button>
+                            <button class="wheel-btn" data-wheels="20">20"</button>
+                            <button class="wheel-btn" data-wheels="21">21"</button>
+                        </div>
+                    </div>
+
+                    <!-- Interior Selector -->
+                    <div class="config-section">
+                        <h3>INTERIOR</h3>
+                        <div class="interior-options">
+                            <button class="option-btn active" data-interior="leather">Premium Leather</button>
+                            <button class="option-btn" data-interior="nappa">Nappa Leather</button>
+                            <button class="option-btn" data-interior="alcantara">Alcantara</button>
+                        </div>
+                    </div>
+
+                    <!-- Performance Package -->
+                    <div class="config-section">
+                        <h3>PERFORMANCE PACKAGE</h3>
+                        <div class="performance-options">
+                            <button class="option-btn" data-performance="standard">Standard</button>
+                            <button class="option-btn active" data-performance="amg">AMG Sport</button>
+                            <button class="option-btn" data-performance="performance">AMG Performance</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Preview -->
+                <div class="preview" data-aos="fade-left">
+                    <div class="car-preview">
+                        <div class="car-emoji-large">🏎️</div>
+                    </div>
+
+                    <div class="config-summary">
+                        <h3>Your Configuration</h3>
+                        <div class="summary-item">
+                            <span>Color</span>
+                            <span id="summaryColor">Obsidian Black</span>
+                        </div>
+                        <div class="summary-item">
+                            <span>Wheels</span>
+                            <span id="summaryWheels">19"</span>
+                        </div>
+                        <div class="summary-item">
+                            <span>Interior</span>
+                            <span id="summaryInterior">Premium Leather</span>
+                        </div>
+                        <div class="summary-item">
+                            <span>Performance</span>
+                            <span id="summaryPerformance">AMG Sport</span>
+                        </div>
+                        <button class="btn btn-glow" style="width: 100%; margin-top: 20px;">PROCEED TO CHECKOUT</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Test Drive Form -->
+    <section id="contact" class="test-drive">
+        <div class="section-container">
+            <div class="section-header" data-aos="fade-in">
+                <h2 class="section-title">BOOK TEST DRIVE</h2>
+                <div class="section-line"></div>
+                <p class="section-subtitle">Experience the future of luxury driving</p>
+            </div>
+
+            <form class="test-drive-form" data-aos="fade-up" id="testDriveForm">
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" placeholder="Enter your name" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Email Address</label>
+                    <input type="email" placeholder="your@email.com" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Phone Number</label>
+                    <input type="tel" placeholder="+1 (555) 000-0000" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Select Vehicle</label>
+                    <select required>
+                        <option value="amg-gt">AMG GT</option>
+                        <option value="g63">G63 AMG</option>
+                        <option value="s-class">S-Class</option>
+                        <option value="eqs">EQS Electric</option>
+                        <option value="cls">CLS Coupe</option>
+                        <option value="maybach">Maybach</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Preferred Date</label>
+                    <input type="date" required>
+                </div>
+
+                <div class="form-group">
+                    <label>City</label>
+                    <input type="text" placeholder="Your city" required>
+                </div>
+
+                <button type="submit" class="btn btn-glow" style="width: 100%; padding: 15px;">BOOK TEST DRIVE</button>
+            </form>
+        </div>
+    </section>
+
     <!-- Footer -->
     <footer class="footer">
-        <div class="footer-content">
-            <p>&copy; 2026 منصة ذكاء العملات الرقمية. جميع الحقوق محفوظة.</p>
-            <p>البيانات مأخوذة من API العملات الرقمية الموثوقة</p>
+        <div class="section-container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h3>MERCEDES</h3>
+                    <p>Engineering excellence since 1886. Pioneering the future of luxury automotive technology.</p>
+                </div>
+
+                <div class="footer-section">
+                    <h4>PRODUCTS</h4>
+                    <ul>
+                        <li><a href="#">AMG</a></li>
+                        <li><a href="#">Electric</a></li>
+                        <li><a href="#">SUV</a></li>
+                        <li><a href="#">Luxury</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4>SUPPORT</h4>
+                    <ul>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">Service Centers</a></li>
+                        <li><a href="#">Warranty</a></li>
+                        <li><a href="#">FAQ</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4>CONTACT</h4>
+                    <p>📍 Stuttgart, Germany</p>
+                    <p>📞 +49 711 123 4567</p>
+                    <p>✉️ info@mercedes-benz.com</p>
+                </div>
+            </div>
+
+            <div class="footer-divider"></div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2026 Mercedes-Benz AG. All rights reserved.</p>
+                <div class="footer-links">
+                    <a href="#">Privacy</a>
+                    <a href="#">Terms</a>
+                    <a href="#">Cookies</a>
+                </div>
+                <div class="social-links">
+                    <a href="#">𝕏</a>
+                    <a href="#">f</a>
+                    <a href="#">📷</a>
+                    <a href="#">▶</a>
+                </div>
+            </div>
         </div>
     </footer>
 
-    <script src="assets/js/config.js"></script>
-    <script src="assets/js/utils.js"></script>
-    <script src="assets/js/api.js"></script>
-    <script src="assets/js/ui.js"></script>
-    <script src="assets/js/notifications.js"></script>
-    <script src="assets/js/index.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
