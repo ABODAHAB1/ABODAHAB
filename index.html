@@ -1,96 +1,170 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>MRKT Marketplace</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>منصة ذكاء العملات الرقمية - Crypto Intelligence Platform</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/responsive.css">
 </head>
 <body>
-    <div id="preloader">
-        <div class="preloader-content">
-            <div class="preloader-logo"><i class="fa-solid fa-cube"></i></div>
-            <h1 class="preloader-title">Welcome to MRKT Marketplace</h1>
-            <p class="preloader-subtitle">Loading digital gifts...</p>
-            <div class="preloader-spinner" style="opacity: 0;">
-                <div class="spinner"></div>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <span class="logo-icon">₿</span>
+                <span class="logo-text">CryptoHub</span>
+            </div>
+            <button class="menu-toggle" id="menuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="pages/prices.html" class="nav-link">الأسعار المباشرة</a></li>
+                <li><a href="pages/news.html" class="nav-link">الأخبار الرسمية</a></li>
+                <li><a href="pages/volume.html" class="nav-link">حجم التداول</a></li>
+                <li><a href="pages/analysis.html" class="nav-link">التحليل الفني</a></li>
+                <li><a href="pages/whales.html" class="nav-link">نشاط الحيتان</a></li>
+                <li><a href="pages/alerts.html" class="nav-link">التنبيهات الذكية</a></li>
+                <li><a href="pages/favorites.html" class="nav-link">المفضلة</a></li>
+                <li><a href="pages/settings.html" class="nav-link">الإعدادات</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-content">
+                <h1>منصة ذكاء العملات الرقمية</h1>
+                <p>تابع أسعار العملات الرقمية بشكل مباشر واحصل على تحليلات احترافية</p>
+            </div>
+        </section>
+
+        <!-- Search Section -->
+        <section class="search-section">
+            <div class="search-container">
+                <input type="text" id="searchInput" class="search-input" placeholder="ابحث عن عملة رقمية...">
+                <button id="searchBtn" class="search-btn">البحث</button>
+            </div>
+        </section>
+
+        <!-- Market Overview -->
+        <section class="market-overview">
+            <div class="overview-card">
+                <div class="card-header">إجمالي القيمة السوقية</div>
+                <div class="card-value" id="totalMarketCap">--</div>
+                <div class="card-change" id="marketCapChange">--</div>
+            </div>
+            <div class="overview-card">
+                <div class="card-header">حجم التداول (24 ساعة)</div>
+                <div class="card-value" id="volume24h">--</div>
+                <div class="card-change" id="volumeChange">--</div>
+            </div>
+            <div class="overview-card">
+                <div class="card-header">سيطرة البيتكوين</div>
+                <div class="card-value" id="btcDominance">--</div>
+                <div class="card-change" id="btcDominanceChange">--</div>
+            </div>
+            <div class="overview-card fear-greed">
+                <div class="card-header">مؤشر الخوف والجشع</div>
+                <div class="fear-greed-meter">
+                    <div class="meter-bar">
+                        <div class="meter-fill" id="fearGreedFill"></div>
+                    </div>
+                    <div class="meter-value" id="fearGreedValue">--</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Top Gainers -->
+        <section class="coins-section">
+            <h2>أفضل المكاسب</h2>
+            <div class="coins-grid" id="gainersGrid">
+                <div class="loading-skeleton"></div>
+                <div class="loading-skeleton"></div>
+                <div class="loading-skeleton"></div>
+                <div class="loading-skeleton"></div>
+            </div>
+        </section>
+
+        <!-- Top Losers -->
+        <section class="coins-section">
+            <h2>أكبر الخسائر</h2>
+            <div class="coins-grid" id="losersGrid">
+                <div class="loading-skeleton"></div>
+                <div class="loading-skeleton"></div>
+                <div class="loading-skeleton"></div>
+                <div class="loading-skeleton"></div>
+            </div>
+        </section>
+
+        <!-- Trending Coins -->
+        <section class="coins-section">
+            <h2>العملات الرائجة</h2>
+            <div class="coins-grid" id="trendingGrid">
+                <div class="loading-skeleton"></div>
+                <div class="loading-skeleton"></div>
+                <div class="loading-skeleton"></div>
+                <div class="loading-skeleton"></div>
+            </div>
+        </section>
+
+        <!-- Quick Navigation -->
+        <section class="quick-nav">
+            <h2>الملاحة السريعة</h2>
+            <div class="nav-cards">
+                <a href="pages/prices.html" class="nav-card">
+                    <div class="nav-icon">📈</div>
+                    <div class="nav-title">الأسعار المباشرة</div>
+                    <div class="nav-desc">تتبع أسعار العملات الرقمية</div>
+                </a>
+                <a href="pages/news.html" class="nav-card">
+                    <div class="nav-icon">📰</div>
+                    <div class="nav-title">الأخبار</div>
+                    <div class="nav-desc">آخر أخبار العملات الرقمية</div>
+                </a>
+                <a href="pages/analysis.html" class="nav-card">
+                    <div class="nav-icon">📊</div>
+                    <div class="nav-title">التحليل الفني</div>
+                    <div class="nav-desc">مؤشرات وتحليلات احترافية</div>
+                </a>
+                <a href="pages/whales.html" class="nav-card">
+                    <div class="nav-icon">🐋</div>
+                    <div class="nav-title">نشاط الحيتان</div>
+                    <div class="nav-desc">تتبع الحركات الكبيرة</div>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Notification Permission Modal -->
+    <div class="modal" id="notificationModal">
+        <div class="modal-content">
+            <h2>تفعيل التنبيهات</h2>
+            <p>هل تريد تلقي تنبيهات وإشعارات سوق العملات الرقمية المهمة؟</p>
+            <div class="modal-buttons">
+                <button id="notificationYes" class="btn btn-primary">نعم، فعّل التنبيهات</button>
+                <button id="notificationNo" class="btn btn-secondary">لا، شكراً</button>
             </div>
         </div>
     </div>
-    <div id="app" class="app">
-        <header class="app-header">
-            <nav class="top-nav">
-                <div class="nav-scroll">
-                    <button class="nav-tab active">Gifts</button>
-                    <button class="nav-tab">Stickers</button>
-                    <button class="nav-tab">Stars & Premium</button>
-                    <button class="nav-tab">Collections</button>
-                    <button class="nav-tab">Channels</button>
-                    <button class="nav-tab">In-Game</button>
-                </div>
-            </nav>
-            <div class="search-section">
-                <div class="search-box">
-                    <i class="fa-solid fa-magnifying-glass"></i>
-                    <input type="text" placeholder="Search by NFT name or number">
-                    <button class="filter-toggle"><i class="fa-solid fa-sliders"></i></button>
-                </div>
-                <button class="action-btn cart-btn">
-                    <i class="fa-solid fa-cart-shopping"></i>
-                    <span class="badge">0</span>
-                </button>
-                <button class="action-btn">
-                    <i class="fa-solid fa-bell"></i>
-                </button>
-            </div>
-        </header>
-        <section class="filters-section">
-            <div class="filters-scroll">
-                <button class="filter-btn active"><span>NFT</span><i class="fa-solid fa-chevron-down"></i></button>
-                <button class="filter-btn"><span>Model</span><i class="fa-solid fa-chevron-down"></i></button>
-                <button class="filter-btn"><span>Backdrop</span><i class="fa-solid fa-chevron-down"></i></button>
-                <button class="filter-btn"><span>Symbol</span><i class="fa-solid fa-chevron-down"></i></button>
-                <button class="filter-btn"><span>Price</span><i class="fa-solid fa-chevron-down"></i></button>
-                <button class="filter-btn highlight"><span>Pre-Market</span></button>
-                <button class="filter-btn"><span>Unupgraded</span></button>
-                <button class="filter-btn"><span>Crafted</span></button>
-                <button class="filter-btn"><span>Transferable</span></button>
-            </div>
-        </section>
-        <main class="market-section">
-            <div class="market-grid" id="marketGrid"></div>
-        </main>
-        <nav class="bottom-nav">
-            <button class="nav-item active">
-                <i class="fa-solid fa-store"></i>
-                <span>Market</span>
-            </button>
-            <button class="nav-item">
-                <i class="fa-solid fa-receipt"></i>
-                <span>Orders</span>
-            </button>
-            <button class="nav-item">
-                <i class="fa-solid fa-gamepad"></i>
-                <span>Play Hub</span>
-            </button>
-            <button class="nav-item">
-                <i class="fa-solid fa-list-check"></i>
-                <span>Tasks</span>
-            </button>
-            <button class="nav-item">
-                <i class="fa-solid fa-folder-open"></i>
-                <span>Storage</span>
-            </button>
-        </nav>
-    </div>
-    <div class="toast" id="toast">
-        <i class="fa-solid fa-circle-check"></i>
-        <span>Gift added successfully!</span>
-    </div>
-    <script src="script.js"></script>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2026 منصة ذكاء العملات الرقمية. جميع الحقوق محفوظة.</p>
+            <p>البيانات مأخوذة من API العملات الرقمية الموثوقة</p>
+        </div>
+    </footer>
+
+    <script src="assets/js/config.js"></script>
+    <script src="assets/js/utils.js"></script>
+    <script src="assets/js/api.js"></script>
+    <script src="assets/js/ui.js"></script>
+    <script src="assets/js/notifications.js"></script>
+    <script src="assets/js/index.js"></script>
 </body>
 </html>

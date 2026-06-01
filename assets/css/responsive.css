@@ -1,0 +1,178 @@
+@media (max-width: 768px) {
+    .menu-toggle {
+        display: flex;
+    }
+
+    .nav-links {
+        position: absolute;
+        top: 70px;
+        right: 0;
+        left: 0;
+        background: rgba(15, 23, 42, 0.95);
+        backdrop-filter: blur(10px);
+        flex-direction: column;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease;
+        border-bottom: 1px solid var(--dark-border);
+    }
+
+    .nav-links.active {
+        max-height: 500px;
+    }
+
+    .nav-link {
+        padding: 15px 20px;
+        border-bottom: 1px solid var(--dark-border);
+    }
+
+    .hero {
+        padding: 60px 20px;
+        margin: 20px 10px;
+    }
+
+    .hero h1 {
+        font-size: 32px;
+    }
+
+    .hero p {
+        font-size: 16px;
+    }
+
+    .search-container {
+        flex-direction: column;
+    }
+
+    .search-btn {
+        width: 100%;
+    }
+
+    .market-overview {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 15px;
+        padding: 20px 10px;
+    }
+
+    .coins-grid {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    }
+
+    .nav-cards {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .modal-content {
+        padding: 30px 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .nav-container {
+        height: 60px;
+    }
+
+    .logo {
+        font-size: 18px;
+    }
+
+    .logo-icon {
+        font-size: 24px;
+    }
+
+    .hero {
+        padding: 40px 15px;
+        margin: 15px 5px;
+        border-radius: 12px;
+    }
+
+    .hero h1 {
+        font-size: 24px;
+        margin-bottom: 15px;
+    }
+
+    .hero p {
+        font-size: 14px;
+    }
+
+    .market-overview {
+        grid-template-columns: 1fr;
+        gap: 12px;
+        padding: 15px 10px;
+    }
+
+    .overview-card {
+        padding: 15px;
+    }
+
+    .card-value {
+        font-size: 20px;
+    }
+
+    .coins-section {
+        padding: 20px 10px;
+    }
+
+    .coins-section h2 {
+        font-size: 20px;
+        margin-bottom: 15px;
+    }
+
+    .coins-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .coin-card {
+        padding: 15px;
+    }
+
+    .nav-cards {
+        grid-template-columns: 1fr;
+    }
+
+    .nav-card {
+        padding: 20px 15px;
+    }
+
+    .nav-icon {
+        font-size: 36px;
+    }
+
+    .nav-title {
+        font-size: 16px;
+    }
+
+    .nav-desc {
+        font-size: 13px;
+    }
+
+    .search-section {
+        padding: 20px 10px;
+    }
+
+    .quick-nav {
+        padding: 20px 10px;
+    }
+
+    .quick-nav h2 {
+        font-size: 20px;
+        margin-bottom: 15px;
+    }
+
+    .footer {
+        padding: 20px 10px;
+    }
+
+    .footer-content p {
+        font-size: 12px;
+    }
+}
+
+/* Dark Mode (Default) */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --dark-bg: #0f172a;
+        --dark-card: #1e293b;
+        --light-text: #f1f5f9;
+    }
+}
