@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>التنبيهات الذكية - Crypto Intelligence Platform</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/responsive.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo"><span class="logo-icon">₿</span><span class="logo-text">CryptoHub</span></div>
+            <button class="menu-toggle" id="menuToggle"><span></span><span></span><span></span></button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="../index.html" class="nav-link">الرئيسية</a></li>
+                <li><a href="prices.html" class="nav-link">الأسعار</a></li>
+                <li><a href="news.html" class="nav-link">الأخبار</a></li>
+                <li><a href="volume.html" class="nav-link">حجم التداول</a></li>
+                <li><a href="analysis.html" class="nav-link">التحليل الفني</a></li>
+                <li><a href="whales.html" class="nav-link">الحيتان</a></li>
+                <li><a href="favorites.html" class="nav-link">المفضلة</a></li>
+                <li><a href="settings.html" class="nav-link">الإعدادات</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <section class="coins-section">
+            <h2>🔔 التنبيهات الذكية</h2>
+            <p style="color: var(--muted-text); margin-bottom: 30px;">أنشئ تنبيهات مخصصة للعملات والأحداث التي تهمك</p>
+
+            <div class="alert-form">
+                <h3>إنشاء تنبيه جديد</h3>
+                <div class="form-group">
+                    <label>العملة</label>
+                    <input type="text" id="alertCoin" class="form-input" placeholder="مثال: Bitcoin, Ethereum">
+                </div>
+                <div class="form-group">
+                    <label>نوع التنبيه</label>
+                    <select id="alertType" class="form-select">
+                        <option value="price_up">ارتفاع السعر</option>
+                        <option value="price_down">انخفاض السعر</option>
+                        <option value="volume_spike">ارتفاع حجم التداول</option>
+                        <option value="technical_signal">إشارة تقنية</option>
+                        <option value="news">أخبار جديدة</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>القيمة (للأسعار بالدولار)</label>
+                    <input type="number" id="alertValue" class="form-input" placeholder="مثال: 50000">
+                </div>
+                <button id="createAlertBtn" class="btn btn-primary" style="width: 100%; margin-top: 15px;">إنشاء التنبيه</button>
+            </div>
+
+            <h3 style="margin-top: 40px; margin-bottom: 20px;">التنبيهات النشطة</h3>
+            <div id="alertsList" class="alerts-list">
+                <!-- سيتم تحميل التنبيهات هنا -->
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2026 منصة ذكاء العملات الرقمية. جميع الحقوق محفوظة.</p>
+        </div>
+    </footer>
+
+    <style>
+        .alert-form {
+            background: rgba(30, 41, 59, 0.8);
+            border: 1px solid var(--dark-border);
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 30px;
+        }
+
+        .alert-form h3 {
+            margin-bottom: 20px;
+            font-size: 18px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--muted-text);
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .form-input,
+        .form-select {
+            width: 100%;
+            padding: 12px 15px;
+            background: var(--dark-bg);
+            border: 1px solid var(--dark-border);
+            border-radius: 8px;
+            color: var(--light-text);
+            font-size: 14px;
+        }
+
+        .form-input:focus,
+        .form-select:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+        }
+
+        .alerts-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .alert-item {
+            background: rgba(30, 41, 59, 0.8);
+            border: 1px solid var(--dark-border);
+            border-radius: 12px;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .alert-item:hover {
+            background: rgba(30, 41, 59, 1);
+            border-color: var(--primary-color);
+        }
+
+        .alert-content h4 {
+            margin-bottom: 8px;
+            color: var(--light-text);
+        }
+
+        .alert-details {
+            display: flex;
+            gap: 20px;
+            font-size: 13px;
+            color: var(--muted-text);
+            margin-top: 8px;
+        }
+
+        .alert-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .alert-btn {
+            padding: 8px 16px;
+            background: var(--dark-bg);
+            border: 1px solid var(--dark-border);
+            border-radius: 6px;
+            color: var(--light-text);
+            cursor: pointer;
+            font-size: 12px;
+            transition: var(--transition);
+        }
+
+        .alert-btn:hover {
+            border-color: var(--danger-color);
+            color: var(--danger-color);
+        }
+
+        .alert-badge {
+            display: inline-block;
+            padding: 4px 10px;
+            background: rgba(99, 102, 241, 0.2);
+            border-radius: 4px;
+            color: var(--primary-color);
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--muted-text);
+        }
+    </style>
+
+    <script src="../assets/js/config.js"></script>
+    <script src="../assets/js/utils.js"></script>
+    <script src="../assets/js/notifications.js"></script>
+    <script>
+        class AlertsPage {
+            constructor() {
+                this.alerts = Utils.getLocalStorage(CONFIG.STORAGE_KEYS.ALERTS) || [];
+                this.init();
+            }
+
+            init() {
+                NotificationManager.init();
+                this.setupCreateAlert();
+                this.renderAlerts();
+            }
+
+            setupCreateAlert() {
+                const createBtn = document.getElementById('createAlertBtn');
+                createBtn.addEventListener('click', () => this.createAlert());
+            }
+
+            createAlert() {
+                const coin = document.getElementById('alertCoin').value;
+                const type = document.getElementById('alertType').value;
+                const value = document.getElementById('alertValue').value;
+
+                if (!coin || !type) {
+                    alert('الرجاء ملء جميع الحقول المطلوبة');
+                    return;
+                }
+
+                const alert = {
+                    id: Utils.generateId(),
+                    coin: coin,
+                    type: type,
+                    value: value || null,
+                    createdAt: new Date().toISOString(),
+                    active: true
+                };
+
+                this.alerts.push(alert);
+                Utils.setLocalStorage(CONFIG.STORAGE_KEYS.ALERTS, this.alerts);
+
+                document.getElementById('alertCoin').value = '';
+                document.getElementById('alertValue').value = '';
+                document.getElementById('alertType').value = 'price_up';
+
+                this.renderAlerts();
+                UI.showNotification('تم إنشاء التنبيه بنجاح', { body: `تنبيه جديد لـ ${coin}` });
+            }
+
+            renderAlerts() {
+                const alertsList = document.getElementById('alertsList');
+
+                if (this.alerts.length === 0) {
+                    alertsList.innerHTML = '<div class="empty-state">📭 لا توجد تنبيهات حالية</div>';
+                    return;
+                }
+
+                alertsList.innerHTML = this.alerts.map(alert => `
+                    <div class="alert-item">
+                        <div class="alert-content">
+                            <h4>${alert.coin} - ${this.getAlertTypeLabel(alert.type)}</h4>
+                            <div class="alert-details">
+                                <span><span class="alert-badge">${alert.active ? '✓ نشط' : 'متوقف'}</span></span>
+                                <span>تم الإنشاء: ${new Date(alert.createdAt).toLocaleDateString('ar-SA')}</span>
+                                ${alert.value ? `<span>القيمة المستهدفة: $${alert.value}</span>` : ''}
+                            </div>
+                        </div>
+                        <div class="alert-actions">
+                            <button class="alert-btn" onclick="alertsPage.toggleAlert('${alert.id}')">
+                                ${alert.active ? 'إيقاف' : 'تفعيل'}
+                            </button>
+                            <button class="alert-btn" onclick="alertsPage.deleteAlert('${alert.id}')">حذف</button>
+                        </div>
+                    </div>
+                `).join('');
+            }
+
+            getAlertTypeLabel(type) {
+                const labels = {
+                    'price_up': '📈 ارتفاع السعر',
+                    'price_down': '📉 انخفاض السعر',
+                    'volume_spike': '📊 ارتفاع الحجم',
+                    'technical_signal': '🔍 إشارة تقنية',
+                    'news': '📰 أخبار جديدة'
+                };
+                return labels[type] || type;
+            }
+
+            toggleAlert(id) {
+                const alert = this.alerts.find(a => a.id === id);
+                if (alert) {
+                    alert.active = !alert.active;
+                    Utils.setLocalStorage(CONFIG.STORAGE_KEYS.ALERTS, this.alerts);
+                    this.renderAlerts();
+                }
+            }
+
+            deleteAlert(id) {
+                this.alerts = this.alerts.filter(a => a.id !== id);
+                Utils.setLocalStorage(CONFIG.STORAGE_KEYS.ALERTS, this.alerts);
+                this.renderAlerts();
+            }
+        }
+
+        let alertsPage = new AlertsPage();
+    </script>
+</body>
+</html>

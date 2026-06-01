@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>المفضلة - Crypto Intelligence Platform</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/responsive.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo"><span class="logo-icon">₿</span><span class="logo-text">CryptoHub</span></div>
+            <button class="menu-toggle" id="menuToggle"><span></span><span></span><span></span></button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="../index.html" class="nav-link">الرئيسية</a></li>
+                <li><a href="prices.html" class="nav-link">الأسعار</a></li>
+                <li><a href="news.html" class="nav-link">الأخبار</a></li>
+                <li><a href="volume.html" class="nav-link">حجم التداول</a></li>
+                <li><a href="analysis.html" class="nav-link">التحليل الفني</a></li>
+                <li><a href="whales.html" class="nav-link">الحيتان</a></li>
+                <li><a href="alerts.html" class="nav-link">التنبيهات</a></li>
+                <li><a href="settings.html" class="nav-link">الإعدادات</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <section class="coins-section">
+            <h2>⭐ قائمة المفضلة</h2>
+            <p style="color: var(--muted-text); margin-bottom: 30px;">تتبع العملات المفضلة لديك في مكان واحد</p>
+
+            <div id="favoritesList" class="coins-grid">
+                <!-- سيتم تحميل المفضلة هنا -->
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2026 منصة ذكاء العملات الرقمية. جميع الحقوق محفوظة.</p>
+        </div>
+    </footer>
+
+    <style>
+        .empty-favorites {
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--muted-text);
+        }
+
+        .empty-favorites h3 {
+            font-size: 24px;
+            margin-bottom: 15px;
+            color: var(--light-text);
+        }
+
+        .empty-favorites p {
+            font-size: 16px;
+            margin-bottom: 25px;
+        }
+
+        .empty-favorites a {
+            display: inline-block;
+            padding: 12px 30px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: var(--transition);
+        }
+
+        .empty-favorites a:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(99, 102, 241, 0.3);
+        }
+    </style>
+
+    <script src="../assets/js/config.js"></script>
+    <script src="../assets/js/utils.js"></script>
+    <script src="../assets/js/api.js"></script>
+    <script src="../assets/js/ui.js"></script>
+    <script src="../assets/js/notifications.js"></script>
+    <script>
+        class FavoritesPage {
+            constructor() {
+                this.favorites = [];
+                this.init();
+            }
+
+            async init() {
+                NotificationManager.init();
+                await this.loadFavorites();
+            }
+
+            async loadFavorites() {
+                const favoritesList = document.getElementById('favoritesList');
+                const favIds = Utils.getLocalStorage(CONFIG.STORAGE_KEYS.FAVORITES) || [];
+
+                if (favIds.length === 0) {
+                    favoritesList.innerHTML = `
+                        <div style="grid-column: 1/-1;">
+                            <div class="empty-favorites">
+                                <h3>📭 لا توجد عملات مفضلة</h3>
+                                <p>أضف عملاتك المفضلة من صفحة الأسعار</p>
+                                <a href="prices.html">اذهب إلى صفحة الأسعار</a>
+                            </div>
+                        </div>
+                    `;
+                    return;
+                }
+
+                favoritesList.innerHTML = `
+                    ${favIds.slice(0, 4).map(() => '<div class="loading-skeleton"></div>').join('')}
+                `;
+
+                try {
+                    const coins = await Promise.all(
+                        favIds.map(id => CryptoAPI.getCoinDetail(id))
+                    );
+
+                    this.favorites = coins.filter(c => c);
+                    this.renderFavorites();
+                } catch (error) {
+                    favoritesList.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: var(--danger-color);">خطأ في تحميل البيانات</p>';
+                }
+            }
+
+            renderFavorites() {
+                const favoritesList = document.getElementById('favoritesList');
+
+                if (this.favorites.length === 0) {
+                    favoritesList.innerHTML = `
+                        <div style="grid-column: 1/-1;">
+                            <div class="empty-favorites">
+                                <h3>📭 لا توجد عملات مفضلة</h3>
+                                <p>أضف عملاتك المفضلة من صفحة الأسعار</p>
+                                <a href="prices.html">اذهب إلى صفحة الأسعار</a>
+                            </div>
+                        </div>
+                    `;
+                    return;
+                }
+
+                favoritesList.innerHTML = this.favorites.map(coin => UI.createCoinCard({
+                    id: coin.id,
+                    name: coin.name,
+                    symbol: coin.symbol,
+                    image: coin.image?.large || 'https://via.placeholder.com/40',
+                    current_price: coin.market_data?.current_price?.usd || 0,
+                    price_change_percentage_24h: coin.market_data?.price_change_percentage_24h || 0
+                })).join('');
+
+                UI.attachFavoriteListeners();
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            new FavoritesPage();
+        });
+    </script>
+</body>
+</html>

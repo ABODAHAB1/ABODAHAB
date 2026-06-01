@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نشاط الحيتان - Crypto Intelligence Platform</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/responsive.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo"><span class="logo-icon">₿</span><span class="logo-text">CryptoHub</span></div>
+            <button class="menu-toggle" id="menuToggle"><span></span><span></span><span></span></button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="../index.html" class="nav-link">الرئيسية</a></li>
+                <li><a href="prices.html" class="nav-link">الأسعار</a></li>
+                <li><a href="news.html" class="nav-link">الأخبار</a></li>
+                <li><a href="volume.html" class="nav-link">حجم التداول</a></li>
+                <li><a href="analysis.html" class="nav-link">التحليل الفني</a></li>
+                <li><a href="alerts.html" class="nav-link">التنبيهات</a></li>
+                <li><a href="favorites.html" class="nav-link">المفضلة</a></li>
+                <li><a href="settings.html" class="nav-link">الإعدادات</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <section class="coins-section">
+            <h2>🐋 نشاط الحيتان - تتبع الحركات الكبيرة</h2>
+            <p style="color: var(--muted-text); margin-bottom: 30px;">تابع أكبر المحافظ والحركات الضخمة في البلوكتشين</p>
+            
+            <div class="whale-filter">
+                <select id="coinFilter" class="sort-select">
+                    <option value="">جميع العملات</option>
+                    <option value="bitcoin">Bitcoin</option>
+                    <option value="ethereum">Ethereum</option>
+                    <option value="cardano">Cardano</option>
+                </select>
+                <select id="typeFilter" class="sort-select">
+                    <option value="">جميع الأنواع</option>
+                    <option value="buy">عمليات شراء كبيرة</option>
+                    <option value="sell">عمليات بيع كبيرة</option>
+                </select>
+            </div>
+
+            <div id="whaleList" class="whale-activity-list">
+                <!-- الحيتان سيتم تحميلها هنا -->
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2026 منصة ذكاء العملات الرقمية. جميع الحقوق محفوظة.</p>
+        </div>
+    </footer>
+
+    <style>
+        .whale-filter {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .whale-activity-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .whale-card {
+            background: rgba(30, 41, 59, 0.8);
+            border: 1px solid var(--dark-border);
+            border-radius: 12px;
+            padding: 20px;
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .whale-card:hover {
+            background: rgba(30, 41, 59, 1);
+            border-color: var(--primary-color);
+        }
+
+        .whale-info h3 {
+            font-size: 18px;
+            margin-bottom: 8px;
+            color: var(--light-text);
+        }
+
+        .whale-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 12px;
+            margin-top: 12px;
+        }
+
+        .whale-detail-item {
+            background: rgba(99, 102, 241, 0.1);
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+        }
+
+        .whale-detail-label {
+            color: var(--muted-text);
+            font-size: 11px;
+            text-transform: uppercase;
+        }
+
+        .whale-detail-value {
+            color: var(--primary-color);
+            font-weight: 600;
+            margin-top: 2px;
+        }
+
+        .whale-amount {
+            text-align: right;
+        }
+
+        .whale-amount-value {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--success-color);
+        }
+
+        .whale-amount-value.sell {
+            color: var(--danger-color);
+        }
+
+        .whale-amount-label {
+            color: var(--muted-text);
+            font-size: 12px;
+            margin-top: 5px;
+        }
+
+        .whale-time {
+            font-size: 12px;
+            color: var(--muted-text);
+            margin-top: 8px;
+        }
+    </style>
+
+    <script src="../assets/js/config.js"></script>
+    <script src="../assets/js/utils.js"></script>
+    <script src="../assets/js/notifications.js"></script>
+    <script>
+        class WhalesPage {
+            constructor() {
+                this.allWhales = [];
+                this.init();
+            }
+
+            init() {
+                NotificationManager.init();
+                this.loadWhaleData();
+                this.setupFilters();
+            }
+
+            loadWhaleData() {
+                // بيانات محاكاة لنشاط الحيتان
+                this.allWhales = [
+                    {
+                        type: 'buy',
+                        coin: 'Bitcoin',
+                        symbol: 'BTC',
+                        amount: 12.5,
+                        value: 486500,
+                        walletAddress: '1A1z...2cQF',
+                        timestamp: new Date(Date.now() - 600000),
+                        exchange: 'Binance'
+                    },
+                    {
+                        type: 'sell',
+                        coin: 'Ethereum',
+                        symbol: 'ETH',
+                        amount: 350,
+                        value: 612000,
+                        walletAddress: '0x742d...5555',
+                        timestamp: new Date(Date.now() - 1200000),
+                        exchange: 'Kraken'
+                    },
+                    {
+                        type: 'buy',
+                        coin: 'Bitcoin',
+                        symbol: 'BTC',
+                        amount: 8.75,
+                        value: 339750,
+                        walletAddress: '3J98t...DZgc',
+                        timestamp: new Date(Date.now() - 1800000),
+                        exchange: 'Coinbase'
+                    },
+                    {
+                        type: 'sell',
+                        coin: 'Cardano',
+                        symbol: 'ADA',
+                        amount: 2500000,
+                        value: 456000,
+                        walletAddress: 'addr1q9...000',
+                        timestamp: new Date(Date.now() - 2400000),
+                        exchange: 'Huobi'
+                    }
+                ];
+
+                this.renderWhales(this.allWhales);
+            }
+
+            renderWhales(whales) {
+                const whaleList = document.getElementById('whaleList');
+                
+                if (whales.length === 0) {
+                    whaleList.innerHTML = '<p style="text-align: center; color: var(--muted-text); padding: 40px;">لا توجد حركات حيتان</p>';
+                    return;
+                }
+
+                whaleList.innerHTML = whales.map(whale => `
+                    <div class="whale-card">
+                        <div class="whale-info">
+                            <h3>${whale.type === 'buy' ? '📈 شراء' : '📉 بيع'} ${whale.amount.toLocaleString()} ${whale.symbol}</h3>
+                            <div class="whale-details">
+                                <div class="whale-detail-item">
+                                    <div class="whale-detail-label">العملة</div>
+                                    <div class="whale-detail-value">${whale.coin}</div>
+                                </div>
+                                <div class="whale-detail-item">
+                                    <div class="whale-detail-label">المنصة</div>
+                                    <div class="whale-detail-value">${whale.exchange}</div>
+                                </div>
+                                <div class="whale-detail-item">
+                                    <div class="whale-detail-label">المحفظة</div>
+                                    <div class="whale-detail-value" style="font-family: monospace; font-size: 11px;">${whale.walletAddress}</div>
+                                </div>
+                            </div>
+                            <div class="whale-time">⏱️ ${Utils.formatDate(whale.timestamp)}</div>
+                        </div>
+                        <div class="whale-amount">
+                            <div class="whale-amount-value ${whale.type}">${whale.type === 'buy' ? '+' : '-'}$${(whale.value / 1000).toFixed(0)}K</div>
+                            <div class="whale-amount-label">${whale.symbol}</div>
+                        </div>
+                    </div>
+                `).join('');
+            }
+
+            setupFilters() {
+                const coinFilter = document.getElementById('coinFilter');
+                const typeFilter = document.getElementById('typeFilter');
+
+                coinFilter.addEventListener('change', () => this.applyFilters());
+                typeFilter.addEventListener('change', () => this.applyFilters());
+            }
+
+            applyFilters() {
+                const coinFilter = document.getElementById('coinFilter').value;
+                const typeFilter = document.getElementById('typeFilter').value;
+
+                let filtered = this.allWhales;
+
+                if (coinFilter) {
+                    filtered = filtered.filter(w => w.coin.toLowerCase().includes(coinFilter.toLowerCase()));
+                }
+
+                if (typeFilter) {
+                    filtered = filtered.filter(w => w.type === typeFilter);
+                }
+
+                this.renderWhales(filtered);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            new WhalesPage();
+        });
+    </script>
+</body>
+</html>
